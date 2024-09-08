@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 //FireBase Related Import's
 import {auth, provider} from '../firebase';
 import { signInWithPopup } from "firebase/auth";
-
-
+//Redux Related Import's
+import { useDispatch,useSelector } from "react-redux";
+import {useNavigate } from 'react-router-dom';
+import {
+    selectUserName,
+    selectUserPhoto,
+    setUserLoginDetails
+} from '../features/user/userSlice'
 
 export default function Header(props) {
+
+    const dispatch = useDispatch();
+    const history = useNavigate ();
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
+
+useEffect(()=>{
+    auth.onAuthStateChanged( async(user)=>{
+        if(user){
+            setUser(user);
+            history("/home")
+        }
+    });
+},[userName])
+
 
     const handleAuth = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                console.log(result);
+               setUser(result.user)
             })
             .catch((error) => {
                 alert(error.message);
             });
     };
-
+    const setUser = (user) =>{
+        dispatch(
+            setUserLoginDetails({
+                name: user.displayName,
+                email:user.email,
+                photo:user.photoURL
+            })
+        )
+    }
 
 
 
@@ -27,33 +55,36 @@ export default function Header(props) {
       <Logo>
         <img src="/images/logo.svg" />
       </Logo>
+      {!userName ? <Login onClick={handleAuth}>Login</Login> : 
+      <>
       <NavMenu>
         <a href="/home">
           <img src="/images/home-icon.svg" />
           <span>Home</span>
         </a>
-        <a href="/home">
+        <a href="/search">
           <img src="/images/search-icon.svg" />
           <span>SEARCH</span>
         </a>
-        <a href="/home">
+        <a href="/watchlist">
           <img src="/images/watchlist-icon.svg" />
           <span>WATCHLIST</span>
         </a>
-        <a href="/home">
+        <a href="/orignials">
           <img src="/images/original-icon.svg" />
           <span>ORIGINALS</span>
         </a>
-        <a href="/home">
+        <a href="/movies">
           <img src="/images/movie-icon.svg" />
           <span>MOVIES</span>
         </a>
-        <a href="/home">
+        <a href="/series">
           <img src="/images/series-icon.svg" />
           <span>SERIES</span>
         </a>
       </NavMenu>
-      <Login onClick={handleAuth}>Login</Login>
+      <UserImg src={userPhoto} alt={userName} />
+      </>}
     </Nav>
   );
 }
@@ -170,4 +201,8 @@ font-weight: 500;
     border-color: transparent;
 }
 
+`;
+
+const UserImg = styled.img`
+height: 100%;
 `;
