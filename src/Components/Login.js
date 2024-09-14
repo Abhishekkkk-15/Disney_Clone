@@ -28,7 +28,7 @@ const Container = styled.section`
   display:flex;
   flex-direction:column;
   text-align:center;
-  height:180vh;
+  height:100vh;
 `;
 
 const Content = styled.div` 
