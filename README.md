@@ -7,7 +7,7 @@ A visually stunning clone of the Disney+ streaming platform built using React, R
 * 📱 Responsive Design: Optimized for all device sizes.<br>
 * 🔄 React Router: Efficient navigation between pages.<br>
 * 💅 Styled Components: Modern CSS-in-JS for customizable UI.<br>
-🛠️ Packages and Technologies Used<br>
+# 🛠️ Packages and Technologies Used<br>
 * React: For building user interfaces.<br>
 * Redux: State management.<br>
 * Firebase: Backend for authentication and Firestore.<br>
