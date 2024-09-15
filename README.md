@@ -30,5 +30,4 @@ npm start<br>
 # 🌟 Future Improvements<br>
 * Implement more advanced filtering features.<br>
 * Optimize performance for large datasets.<br>
-# 📸 Preview<br>
 
