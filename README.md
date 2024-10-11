@@ -27,7 +27,4 @@ npm start<br>
 * npm start: Start the development server.<br>
 * npm run build: Bundle the app for production.<br>
 * npm test: Run tests.<br>
-# 🌟 Future Improvements<br>
-* Implement more advanced filtering features.<br>
-* Optimize performance for large datasets.<br>
 
